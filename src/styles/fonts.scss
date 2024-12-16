@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Frederick';
+  src: url('/fonts/FrederickatheGreat-Regular.ttf');
+}
+.font-frederick {
+  font-family: 'Frederick' !important;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-22 {
+  font-size: 22px;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6,
+.text-body-1,
+.text-body-2,
+.text-subtitle-1,
+.text-subtitle-2,
+.text-button,
+.text-caption,
+.text-overline {
+  /* font-family: 'Caprasimo' !important; */
+}
+
+body {
+  /*
+  letter-spacing: 1px !important;
+  color: black !important;
+  */
+}
+
+/*
+
+
+'size': .75rem,
+'weight': 500,
+'line-height': 2rem,
+'letter-spacing': .1666666667em,
+'font-family': $body-font-family,
+'text-transform': uppercase
+*/
