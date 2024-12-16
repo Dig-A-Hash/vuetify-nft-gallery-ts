@@ -72,6 +72,9 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "stores": true,
+    "useAppStore": true,
+    "useNftHelperStore": true
   }
 }

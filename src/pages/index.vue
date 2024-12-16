@@ -92,7 +92,7 @@
           <div v-if="nftStore.itemCollections[nftStoreItemCollectionName]">
             Viewing
             <v-chip class="mr-1">{{
-              page === 1 ? "1" : (page - 1) * itemsPerPage + 1
+              page === 1 ? '1' : (page - 1) * itemsPerPage + 1
             }}</v-chip>
             -
             <v-chip class="mr-1">{{
@@ -205,20 +205,19 @@
 </template>
 
 <script setup lang="ts">
-import pkgJson from "../../package.json";
+import pkgJson from '../../package.json';
 import {
   useEvmNftGallery,
   blockchains,
   dahDemoV1Abi as abi,
   useNftStore,
-} from "vue-evm-nft";
-import { useNftHelperStore } from "@/stores/nftHelperStore";
+} from 'vue-evm-nft';
 
-const contractPublicKey = "0xcbb2a9868d73f24c056893131b97a69ffd36eba9";
-const contractAddress: string = "0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63";
+const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
+const contractAddress: string = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
 const chainId = blockchains.avalanche.chainId;
 const itemsPerPage = 5;
-const nftStoreItemCollectionName = "nftSmartContract1";
+const nftStoreItemCollectionName = 'nftSmartContract1';
 
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
