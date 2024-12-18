@@ -32,7 +32,16 @@ This project also ships with Vercel support for SPA applications, and a GitHub W
 ```
 
 ## Project setup
-Install the latest version of [Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs), then clone this project and run...
+Install the latest version of [Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+
+Next install TypeScript to Node.js globally.
+
+```
+npm install -g typescript
+
+```
+
+Then clone this project and run...
 ```
 npm install
 ```
