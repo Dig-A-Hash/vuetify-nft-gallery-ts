@@ -102,7 +102,7 @@
               append-icon="mdi-open-in-new"
               >Ava Scan NFT</v-btn
             >
-            <v-btn
+            <!-- <v-btn
               class="mt-4"
               variant="tonal"
               color="grey"
@@ -118,7 +118,7 @@
               "
               append-icon="mdi-open-in-new"
               >NFT Meta-Data</v-btn
-            >
+            > -->
             <v-btn
               class="mt-4"
               variant="tonal"
