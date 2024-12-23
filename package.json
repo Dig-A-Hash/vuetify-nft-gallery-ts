@@ -4,7 +4,7 @@
   "type": "module",
   "license": "ISC",
   "author": "Kid Sysco @ Dig-A-Hash",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "This is a demo of how to display NFTs by implementing the vue-evm-nft package with Vuetify and Vue using TypeScript.",
   "scripts": {
     "dev": "vite",
