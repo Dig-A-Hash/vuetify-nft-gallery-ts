@@ -6,6 +6,21 @@
   font-family: 'Frederick' !important;
 }
 
+a.link {
+  color: rgb(0, 89, 255) !important;
+  text-decoration: none !important;
+}
+
+a.link:visited {
+  color: rgb(0, 89, 255) !important;
+  text-decoration: none !important;
+}
+
+a.link:hover {
+  color: rgb(34, 118, 245) !important;
+  text-decoration: underline !important;
+}
+
 .font-12 {
   font-size: 12px;
 }

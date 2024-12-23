@@ -1,7 +1,7 @@
 <!-- pages/index.vue -->
 <template>
-  <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
-    <div class="text-h3 mb-4">useEvmMetaData TypeScript Demo</div>
+  <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4 mt-4" max-width="1000">
+    <div class="text-h4 mb-4">useEvmNftGallery TypeScript Demo</div>
     <v-container
       fluid
       class="ma-0 border-top-grey border-bottom-grey bg-blue-darken-4"
@@ -11,7 +11,8 @@
           <div>
             <div class="text-h6 mb-0">Dig-A-Hash Roadmap</div>
             <div class="mt-n1">
-              Very large pages of data, loading very fast!
+              Each of the announcements below is an NFT on the Avalanche C-Chain
+              Mainnet!
             </div>
           </div>
         </v-col>
@@ -57,7 +58,7 @@
       <v-row v-for="(nft, index) in nfts" :key="nft.tokenId">
         <v-col cols="12" sm="3" md="2">
           <v-img
-            :src="nftStore.getImageMedium(nft.metaData.image)"
+            :src="nft.metaData.image"
             :lazy-src="lazy"
             class="ma-4"
           ></v-img>
@@ -120,7 +121,7 @@
             >
           </div>
         </v-col>
-        <v-divider class="ma-4"></v-divider>
+        <v-divider class="my-4"></v-divider>
       </v-row>
       <v-row class="mt-6">
         <v-col>
@@ -139,20 +140,18 @@
 import pkgJson from '../../package.json';
 import {
   useEvmNftGallery,
-  useEvmMetaDataGallery,
   blockchains,
   dahDemoV1Abi as abi,
   useNftStore,
+  useEvmNft,
+  type Nft,
 } from 'vue-evm-nft';
 
-// Pour House Studios
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
-const contractAddress: string = '0xd8de74b630c8bf1b3ca59010e601c3e271f0d85b';
-const chainId = blockchains.fantom.chainId;
-const rpc = blockchains.fantom.publicRpc;
-
-const itemsPerPage = 50;
-const nftStoreItemCollectionName = 'nftSmartContract1';
+const contractAddress: string = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
+const chainId = blockchains.avalanche.chainId;
+const itemsPerPage = 5;
+const nftStoreItemCollectionName = 'useEvmNftGallery1';
 
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
@@ -166,15 +165,16 @@ const {
   loadingMessage,
   isAscending,
   toggleSortOrder,
-} = useEvmMetaDataGallery({
+  getTokenMetaData,
+} = useEvmNftGallery({
   contractPublicKey,
   contractAddress,
   abi,
   chainId,
-  rpc,
+  holderPublicKey: null,
+  rpc: blockchains.avalanche.publicRpc,
   itemsPerPage,
   nftStoreItemCollectionName,
   isAscendingSort: false,
-  isGetAllNftQuery: false,
 });
 </script>
