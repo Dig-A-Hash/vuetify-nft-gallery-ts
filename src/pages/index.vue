@@ -231,15 +231,15 @@ const {
   loadingMessage,
   isAscending,
   toggleSortOrder,
-} = useEvmNftGallery(
+} = useEvmNftGallery({
   contractPublicKey,
   contractAddress,
   abi,
   chainId,
-  null,
-  blockchains.avalanche.publicRpc,
+  holderPublicKey: null,
+  rpc: blockchains.avalanche.publicRpc,
   itemsPerPage,
   nftStoreItemCollectionName,
-  false
-);
+  isAscendingSort: false,
+});
 </script>
