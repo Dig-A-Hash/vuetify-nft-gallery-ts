@@ -1,7 +1,7 @@
 <!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
-    <div class="text-h3 mb-4">useEvmMetaData TypeScript Demo</div>
+    <div class="text-h4 mb-4 mt-4">useEvmMetaData TypeScript Demo</div>
     <v-container
       fluid
       class="ma-0 border-top-grey border-bottom-grey bg-blue-darken-4"
@@ -152,7 +152,7 @@ const chainId = blockchains.fantom.chainId;
 const rpc = blockchains.fantom.publicRpc;
 
 const itemsPerPage = 50;
-const nftStoreItemCollectionName = 'nftSmartContract1';
+const nftStoreItemCollectionName = 'useEvmMetaDataGallery1';
 
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
