@@ -156,7 +156,7 @@ import {
   useEvmNft,
   type Nft,
 } from 'vue-evm-nft';
-import { useRouter } from 'vue-router';    
+import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
@@ -169,9 +169,9 @@ const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 
-const goToMetaDataPage = (tokenId: string) => {  
-  router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);  
-};  
+const goToMetaDataPage = (tokenId: number) => {
+  router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);
+};
 const {
   page,
   numberOfPages,
