@@ -60,7 +60,7 @@ onMounted(async () => {
         null,
         null,
         contractPublicKey,
-        contractAddress.toLowerCase(),
+        contractAddress,
         abi,
         chainId
       );
