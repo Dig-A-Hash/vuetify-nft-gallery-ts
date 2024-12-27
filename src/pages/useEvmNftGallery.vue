@@ -102,7 +102,7 @@
               append-icon="mdi-open-in-new"
               >Ava Scan NFT</v-btn
             >
-            <v-btn
+            <!-- <v-btn
               class="mt-4"
               variant="tonal"
               color="grey"
@@ -116,6 +116,16 @@
                   contractAddress
                 )
               "
+              append-icon="mdi-open-in-new"
+              >NFT Meta-Data</v-btn
+            > -->
+            <v-btn
+              class="mt-4"
+              variant="tonal"
+              color="grey"
+              rounded="lg"
+              target="_blank"
+              @click="goToMetaDataPage(nft.tokenId)"
               append-icon="mdi-open-in-new"
               >NFT Meta-Data</v-btn
             >
@@ -146,6 +156,8 @@ import {
   useEvmNft,
   type Nft,
 } from 'vue-evm-nft';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
 const contractAddress: string = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
@@ -157,6 +169,9 @@ const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 
+const goToMetaDataPage = (tokenId: number) => {
+  router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);
+};
 const {
   page,
   numberOfPages,
