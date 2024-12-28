@@ -11,8 +11,11 @@
           <div>
             <div class="text-h6 mb-0">Dig-A-Hash Roadmap</div>
             <div class="mt-n1">
-              Each of the announcements below is an NFT on the Avalanche C-Chain
-              Mainnet!
+              {{
+                elapsedFormattedTime === ''
+                  ? '0.0 Seconds (Cached Results)'
+                  : elapsedFormattedTime
+              }}
             </div>
           </div>
         </v-col>
@@ -61,6 +64,7 @@
             :src="nft.metaData.image"
             :lazy-src="lazy"
             class="ma-4"
+            height="150"
           ></v-img>
         </v-col>
         <v-col>
@@ -172,6 +176,11 @@ const nftHelperStore = useNftHelperStore();
 const goToMetaDataPage = (tokenId: number) => {
   router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);
 };
+
+// Start timing before fetching NFTs
+const startTime = performance.now();
+const elapsedFormattedTime = ref('');
+
 const {
   page,
   numberOfPages,
@@ -191,5 +200,14 @@ const {
   itemsPerPage,
   nftStoreItemCollectionName,
   isAscendingSort: false,
+});
+
+// Stop timing after the operation is complete
+watch(isLoading, (value) => {
+  if (!value) {
+    const endTime = performance.now();
+    const elapsedTime = endTime - startTime;
+    elapsedFormattedTime.value = (elapsedTime / 1000).toFixed(2) + ' seconds';
+  }
 });
 </script>

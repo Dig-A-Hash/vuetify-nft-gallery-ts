@@ -1,21 +1,32 @@
 <!-- pages/index.vue -->
 <template>
-  <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
-    <div class="text-center mb-8 pt-4 mt-8">
-      <div class="d-flex justify-center">
-        <v-img
-          transition="fade-transition"
-          src="/img/services/vuetify-nft-gallery.jpg"
-          alt="Dig-A-Hash"
-          height="450"
-          eager
-        />
-      </div>
-
+  <v-container class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
+    <div class="mt-sm-4">
+      <v-img
+        class="rounded"
+        transition="fade-transition"
+        src="/img/services/vuetify-nft-gallery.jpg"
+        alt="Dig-A-Hash"
+        height="450"
+        eager
+      >
+        <template #sources>
+          <source
+            srcset="
+              /img/services/vuetify-nft-gallery-450.webp   450w,
+              /img/services/vuetify-nft-gallery-1000.webp 1000w
+            "
+            sizes="(max-width: 500px) 200px, 1000px"
+            type="image/webp"
+          />
+        </template>
+      </v-img>
+    </div>
+    <div class="text-center pt-4">
       <v-card
-        class="mx-auto mt-10 pa-6 elevation-0 bg-grey-darken-4"
+        class="mx-auto pa-6 elevation-0 bg-grey-darken-4"
         max-width="600"
-        rounded="xl"
+        rounded="md"
       >
         <h1 class="text-h5 sm-text-h2 text-orange">
           Vuetify NFT Gallery {{ pkgJson.version }}
@@ -32,56 +43,62 @@
         </p>
       </v-card>
 
-      <div class="d-flex align-center justify-space-around mt-8">
-        <a href="https://www.dig-a-hash.com/" target="_new" class="link">
-          <v-img
-            src="/img/services/logo-hero-transparent.png"
-            height="41"
-            width="100"
-            eager
-            class="mx-auto"
+      <v-row class="mt-4">
+        <v-col>
+          <a href="https://www.dig-a-hash.com/" target="_new" class="link">
+            <v-img
+              src="/img/services/dig-a-hash-wide.png"
+              height="41"
+              eager
+              class="mx-auto"
+            >
+            </v-img>
+            <div class="mt-1 font-12">Dig-A-Hash</div>
+          </a>
+        </v-col>
+        <v-col>
+          <a href="https://www.dog-plex.com/" target="_new" class="link">
+            <v-img
+              src="/img/customers/dog-plex-logo.webp"
+              height="41"
+              eager
+              class="mx-auto"
+            >
+            </v-img>
+            <div class="mt-1 font-12">Dog Plex</div>
+          </a>
+        </v-col>
+        <v-col>
+          <a href="https://www.urbanhomesteadx.com/" target="_new" class="link">
+            <v-img
+              src="/img/customers/urban-homestead-x.webp"
+              width="100"
+              height="41"
+              eager
+              class="mx-auto"
+            ></v-img>
+            <div class="mt-1 font-12">Urban Homestead X</div>
+          </a>
+        </v-col>
+        <v-col>
+          <a
+            href="https://www.pour-house-studios.com/"
+            target="_new"
+            class="link"
           >
-          </v-img>
-          <div class="mt-1 font-12">Dig-A-Hash</div>
-        </a>
-        <a href="https://www.dog-plex.com/" target="_new" class="link">
-          <v-img
-            src="/img/customers/dog-plex-logo.png"
-            width="100"
-            height="41"
-            eager
-            class="mx-auto"
-          >
-          </v-img>
-          <div class="mt-1 font-12">Dog Plex</div>
-        </a>
-        <a href="https://www.urbanhomesteadx.com/" target="_new" class="link">
-          <v-img
-            src="/img/customers/urban-homestead-x.png"
-            width="100"
-            height="41"
-            eager
-            class="mx-auto"
-          ></v-img>
-          <div class="mt-1 font-12">Urban Homestead X</div>
-        </a>
-        <a
-          href="https://www.pour-house-studios.com/"
-          target="_new"
-          class="link"
-        >
-          <v-img
-            src="/img/customers/pour-house.png"
-            width="100"
-            height="41"
-            eager
-            class="mx-auto"
-          ></v-img>
-          <div class="mt-1 font-12">Pour House Studios</div>
-        </a>
-      </div>
+            <v-img
+              src="/img/customers/pour-house.png"
+              width="100"
+              height="41"
+              eager
+              class="mx-auto"
+            ></v-img>
+            <div class="mt-1 font-12">Pour House Studios</div>
+          </a>
+        </v-col>
+      </v-row>
     </div>
-  </v-sheet>
+  </v-container>
 </template>
 
 <script setup lang="ts">

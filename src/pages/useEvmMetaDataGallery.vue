@@ -9,9 +9,13 @@
       <v-row class="">
         <v-col cols="12" sm="6" class="d-flex justify-start align-center">
           <div>
-            <div class="text-h6 mb-0">Dig-A-Hash Roadmap</div>
+            <div class="text-h6 mb-0">Painting NFTs</div>
             <div class="mt-n1">
-              Very large pages of data, loading very fast!
+              {{
+                elapsedFormattedTime === ''
+                  ? '0.0 Seconds (Cached Results)'
+                  : elapsedFormattedTime
+              }}
             </div>
           </div>
         </v-col>
@@ -60,6 +64,7 @@
             :src="nftStore.getImageMedium(nft.metaData.image)"
             :lazy-src="lazy"
             class="ma-4"
+            height="150"
           ></v-img>
         </v-col>
         <v-col>
@@ -158,6 +163,10 @@ const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 
+// Start timing before fetching NFTs
+const startTime = performance.now();
+const elapsedFormattedTime = ref('');
+
 const {
   page,
   numberOfPages,
@@ -176,5 +185,14 @@ const {
   nftStoreItemCollectionName,
   isAscendingSort: false,
   isGetAllNftQuery: false,
+});
+
+// Stop timing after the operation is complete
+watch(isLoading, (value) => {
+  if (!value) {
+    const endTime = performance.now();
+    const elapsedTime = endTime - startTime;
+    elapsedFormattedTime.value = (elapsedTime / 1000).toFixed(2) + ' seconds';
+  }
 });
 </script>
