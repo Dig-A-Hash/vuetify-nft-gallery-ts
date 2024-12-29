@@ -1,7 +1,9 @@
 <!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
-    <div class="text-h4 mb-4 mt-4">useEvmMetaData TypeScript Demo</div>
+    <div class="text-h4 mb-4 mt-4 text-orange">
+      useEvmMetaData TypeScript Demo
+    </div>
     <v-container
       fluid
       class="ma-0 border-top-grey border-bottom-grey bg-blue-darken-4"
@@ -57,7 +59,27 @@
       </v-row>
     </v-container>
 
-    <v-container fluid class="pt-8 pt-2 px-2 bg-grey-darken-4">
+    <v-container
+      v-show="!nfts.length"
+      fluid
+      class="pt-8 pt-2 px-2 bg-grey-darken-4 text-center"
+    >
+      <v-progress-circular
+        indeterminate
+        color="grey-darken-1"
+        class="mb-2"
+        width="12"
+        size="96"
+      ></v-progress-circular
+      ><br />
+      Loading...
+    </v-container>
+
+    <v-container
+      v-show="nfts.length"
+      fluid
+      class="pt-8 pt-2 px-2 bg-grey-darken-4"
+    >
       <v-row v-for="(nft, index) in nfts" :key="nft.tokenId">
         <v-col cols="12" sm="3" md="2">
           <v-img

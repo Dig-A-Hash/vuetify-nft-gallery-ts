@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="grey-darken-4" dark>
       <v-app-bar-nav-icon @click="appStore.toggleMainNav" />
-      <v-toolbar-title>Vuetify NFT Gallery</v-toolbar-title>
+      <v-toolbar-title>Vuetify NFT Gallery (TS)</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         href="https://github.com/Dig-A-Hash/vuetify-nft-gallery-ts"
@@ -47,6 +47,4 @@
 
 <script lang="ts" setup>
 const appStore = useAppStore();
-
-const drawer = ref(null);
 </script>
