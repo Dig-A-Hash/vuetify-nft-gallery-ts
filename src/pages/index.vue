@@ -32,8 +32,11 @@
 
       <p class="text-body-1 text-left">
         A demo showing how to display NFTs by implementing the vue-evm-nft
-        package with Vuetify and Vue using TypeScript. Use the nav menu to
-        browse the different functions.
+        package with Vuetify and Vue using TypeScript. Use the
+        <a href="#" class="link" @click.prevent="appStore.toggleMainNav"
+          >nav menu</a
+        >
+        to browse the different functions.
       </p>
     </v-card>
     <v-card
@@ -176,4 +179,5 @@
 
 <script setup lang="ts">
 import pkgJson from '../../package.json';
+const appStore = useAppStore();
 </script>

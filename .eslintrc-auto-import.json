@@ -75,6 +75,9 @@
     "watchSyncEffect": true,
     "stores": true,
     "useAppStore": true,
-    "useNftHelperStore": true
+    "useNftHelperStore": true,
+    "useCounterStore": true,
+    "appStore": true,
+    "app": true
   }
 }

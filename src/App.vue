@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app color="grey-darken-4" dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="appStore.toggleMainNav" />
       <v-toolbar-title>Vuetify NFT Gallery</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -11,7 +11,11 @@
         size="large"
       ></v-btn>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" color="grey-darken-4">
+    <v-navigation-drawer
+      app
+      v-model="appStore.isMainNavShowing"
+      color="grey-darken-4"
+    >
       <v-list>
         <v-divider></v-divider>
 
@@ -42,5 +46,7 @@
 </template>
 
 <script lang="ts" setup>
+const appStore = useAppStore();
+
 const drawer = ref(null);
 </script>
