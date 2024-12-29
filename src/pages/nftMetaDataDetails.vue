@@ -3,8 +3,8 @@
 <template>
   <v-container>
     <v-card v-if="nftMetaData">
-      <v-card-title>{{ nftMetaData.name }}</v-card-title>
-      <v-card-subtitle v-html="nftMetaData.description"></v-card-subtitle>
+      <v-card-title class="text-orange">{{ nftMetaData.name }}</v-card-title>
+      <div class="mx-4" v-html="nftMetaData.description"></div>
       <v-img :src="nftMetaData.image" height="200" class="mt-4" />
       <v-data-table
         :headers="headers"

@@ -10,10 +10,10 @@
         <v-col cols="12" sm="6" class="d-flex justify-start align-center">
           <div>
             <div class="text-h6 mb-0">Painting NFTs</div>
-            <div class="mt-n1">
+            <div class="mt-n1 font-12">
               {{
                 elapsedFormattedTime === ''
-                  ? '0.0 Seconds (Cached Results)'
+                  ? '0.0 Seconds (Pinia Cached Results)'
                   : elapsedFormattedTime
               }}
             </div>
