@@ -76,9 +76,6 @@
     "stores": true,
     "useAppStore": true,
     "useNftHelperStore": true,
-    "useCounterStore": true,
-    "appStore": true,
-    "app": true,
     "useSeo": true
   }
 }
