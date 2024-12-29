@@ -180,4 +180,5 @@
 <script setup lang="ts">
 import pkgJson from '../../package.json';
 const appStore = useAppStore();
+useSeo(null, null);
 </script>

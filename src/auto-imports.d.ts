@@ -67,6 +67,7 @@ declare global {
   const useNftHelperStore: typeof import('./stores/nftHelperStore')['useNftHelperStore']
   const useRoute: typeof import('vue-router/auto')['useRoute']
   const useRouter: typeof import('vue-router/auto')['useRouter']
+  const useSeo: typeof import('./composables/useSeo.js')['useSeo']
   const useSlots: typeof import('vue')['useSlots']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const watch: typeof import('vue')['watch']
@@ -141,6 +142,7 @@ declare module 'vue' {
     readonly useNftHelperStore: UnwrapRef<typeof import('./stores/nftHelperStore')['useNftHelperStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router/auto')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router/auto')['useRouter']>
+    readonly useSeo: UnwrapRef<typeof import('./composables/useSeo.js')['useSeo']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

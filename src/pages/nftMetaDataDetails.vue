@@ -71,6 +71,7 @@ onMounted(async () => {
       const metaData = await evmNft.getTokenMetaData([Number(tokenId)]);
       nftMetaData.value = metaData[0].metaData; // assign to nftMetaData.value
       loadingMessage.value = ''; // Clear loading message
+      useSeo(nftMetaData.value.name, nftMetaData.value.description); // Update SEO
     } catch (error) {
       console.error('Error fetching NFT metadata:', error);
       nftMetaData.value = null; // Handle error case

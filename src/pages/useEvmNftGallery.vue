@@ -192,6 +192,7 @@ const nftStoreItemCollectionName = 'useEvmNftGallery1';
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
+useSeo('useEvmMetaData', 'useEvmMetaData TypeScript NFT Demo');
 
 const goToMetaDataPage = (tokenId: number) => {
   router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);

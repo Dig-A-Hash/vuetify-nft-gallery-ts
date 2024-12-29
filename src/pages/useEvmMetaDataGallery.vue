@@ -163,9 +163,7 @@
 </template>
 
 <script setup lang="ts">
-import pkgJson from '../../package.json';
 import {
-  useEvmNftGallery,
   useEvmMetaDataGallery,
   blockchains,
   dahDemoV1Abi as abi,
@@ -184,6 +182,7 @@ const nftStoreItemCollectionName = 'useEvmMetaDataGallery1';
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
+useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 // Start timing before fetching NFTs
 const startTime = performance.now();
