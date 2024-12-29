@@ -7,6 +7,8 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const LAZY_SRC_PLACEHOLDER: typeof import('./modules/constants')['LAZY_SRC_PLACEHOLDER']
+  const app: typeof import('./stores/app')['app']
+  const appStore: typeof import('./stores/app')['appStore']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -54,8 +56,9 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
-  const useAppStore: typeof import('./stores/app')['useAppStore']
+  const useAppStore: typeof import('./stores/appStore')['useAppStore']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useCounterStore: typeof import('./stores/app')['useCounterStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useId: typeof import('vue')['useId']
@@ -64,6 +67,7 @@ declare global {
   const useNftHelperStore: typeof import('./stores/nftHelperStore')['useNftHelperStore']
   const useRoute: typeof import('vue-router/auto')['useRoute']
   const useRouter: typeof import('vue-router/auto')['useRouter']
+  const useSeo: typeof import('./composables/useSeo.js')['useSeo']
   const useSlots: typeof import('vue')['useSlots']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const watch: typeof import('vue')['watch']
@@ -129,7 +133,7 @@ declare module 'vue' {
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
-    readonly useAppStore: UnwrapRef<typeof import('./stores/app')['useAppStore']>
+    readonly useAppStore: UnwrapRef<typeof import('./stores/appStore')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
@@ -138,6 +142,7 @@ declare module 'vue' {
     readonly useNftHelperStore: UnwrapRef<typeof import('./stores/nftHelperStore')['useNftHelperStore']>
     readonly useRoute: UnwrapRef<typeof import('vue-router/auto')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router/auto')['useRouter']>
+    readonly useSeo: UnwrapRef<typeof import('./composables/useSeo.js')['useSeo']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

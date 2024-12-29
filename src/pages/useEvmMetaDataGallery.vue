@@ -1,7 +1,9 @@
 <!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
-    <div class="text-h4 mb-4 mt-4">useEvmMetaData TypeScript Demo</div>
+    <div class="text-h4 mb-4 mt-4 text-orange">
+      useEvmMetaData TypeScript Demo
+    </div>
     <v-container
       fluid
       class="ma-0 border-top-grey border-bottom-grey bg-blue-darken-4"
@@ -10,10 +12,10 @@
         <v-col cols="12" sm="6" class="d-flex justify-start align-center">
           <div>
             <div class="text-h6 mb-0">Painting NFTs</div>
-            <div class="mt-n1">
+            <div class="mt-n1 font-12">
               {{
                 elapsedFormattedTime === ''
-                  ? '0.0 Seconds (Cached Results)'
+                  ? '0.0 Seconds (Pinia Cached Results)'
                   : elapsedFormattedTime
               }}
             </div>
@@ -57,7 +59,27 @@
       </v-row>
     </v-container>
 
-    <v-container fluid class="pt-8 pt-2 px-2 bg-grey-darken-4">
+    <v-container
+      v-show="!nfts.length"
+      fluid
+      class="pt-8 pt-2 px-2 bg-grey-darken-4 text-center"
+    >
+      <v-progress-circular
+        indeterminate
+        color="grey-darken-1"
+        class="mb-2"
+        width="12"
+        size="96"
+      ></v-progress-circular
+      ><br />
+      Loading...
+    </v-container>
+
+    <v-container
+      v-show="nfts.length"
+      fluid
+      class="pt-8 pt-2 px-2 bg-grey-darken-4"
+    >
       <v-row v-for="(nft, index) in nfts" :key="nft.tokenId">
         <v-col cols="12" sm="3" md="2">
           <v-img
@@ -141,9 +163,7 @@
 </template>
 
 <script setup lang="ts">
-import pkgJson from '../../package.json';
 import {
-  useEvmNftGallery,
   useEvmMetaDataGallery,
   blockchains,
   dahDemoV1Abi as abi,
@@ -162,6 +182,7 @@ const nftStoreItemCollectionName = 'useEvmMetaDataGallery1';
 const lazy = LAZY_SRC_PLACEHOLDER;
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
+useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 // Start timing before fetching NFTs
 const startTime = performance.now();
