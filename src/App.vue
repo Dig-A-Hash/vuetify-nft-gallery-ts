@@ -3,6 +3,13 @@
     <v-app-bar app color="grey-darken-4" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>Vuetify NFT Gallery</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        href="https://github.com/Dig-A-Hash/vuetify-nft-gallery-ts"
+        icon="mdi-github"
+        target="_blank"
+        size="large"
+      ></v-btn>
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" color="grey-darken-4">
       <v-list>
@@ -35,5 +42,5 @@
 </template>
 
 <script lang="ts" setup>
-const drawer = ref(false);
+const drawer = ref(null);
 </script>
