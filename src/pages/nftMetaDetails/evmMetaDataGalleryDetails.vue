@@ -28,13 +28,14 @@ import {
     useEvmMetaDataGallery,
     blockchains,
     dahDemoV1Abi as abi,
+    type Nft,
 } from 'vue-evm-nft';
 
 const route = useRoute();
 const tokenId = route.query.tokenId as string; // Get the tokenId from the URL query  
 
 // Initialize required variables  
-const nftMetaData = ref(null);
+const nftMetaData = ref<Nft | null>(null);
 const loadingMessage = ref('Loading NFT metadata...'); // Initialize loading message  
 const headers = [
     { text: 'Trait Type', value: 'trait_type' },
