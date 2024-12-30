@@ -3,8 +3,8 @@
 <template>
   <v-container>
     <v-card v-if="nftMetaData">
-      <v-card-title>{{ nftMetaData.name }}</v-card-title>
-      <v-card-subtitle v-html="nftMetaData.description"></v-card-subtitle>
+      <v-card-title class="text-orange">{{ nftMetaData.name }}</v-card-title>
+      <div class="mx-4" v-html="nftMetaData.description"></div>
       <v-img :src="nftMetaData.image" height="200" class="mt-4" />
       <v-data-table :headers="headers" :items="nftMetaData.attributes"
         :items-per-page="nftMetaData.attributes.length" class="elevation-1" hide-default-footer>
@@ -66,6 +66,7 @@ onMounted(async () => {
       const metaData = await evmNft.getTokenMetaData([Number(tokenId)]);
       nftMetaData.value = metaData[0].metaData; // assign to nftMetaData.value
       loadingMessage.value = ''; // Clear loading message
+      useSeo(nftMetaData.value.name, nftMetaData.value.name); // Update SEO
     } catch (error) {
       console.error('Error fetching NFT metadata:', error);
       nftMetaData.value = null; // Handle error case
