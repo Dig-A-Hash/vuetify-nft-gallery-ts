@@ -174,7 +174,7 @@ const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 
 const goToMetaDataPage = (tokenId: number) => {
-  router.push(`/nftMetaDataDetails?tokenId=${tokenId}`);
+  router.push(`/nftMetaDetails/evmNftGalleryDetails?tokenId=${tokenId}`);
 };
 
 // Start timing before fetching NFTs

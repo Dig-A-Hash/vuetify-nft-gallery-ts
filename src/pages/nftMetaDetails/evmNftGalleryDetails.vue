@@ -1,4 +1,4 @@
-<!-- pages/nftMetaDataDetails.vue -->
+<!-- pages/evmNftGalleryDetails.vue -->
 
 <template>
   <v-container>
@@ -6,17 +6,12 @@
       <v-card-title>{{ nftMetaData.name }}</v-card-title>
       <v-card-subtitle v-html="nftMetaData.description"></v-card-subtitle>
       <v-img :src="nftMetaData.image" height="200" class="mt-4" />
-      <v-data-table
-        :headers="headers"
-        :items="nftMetaData.attributes"
-        class="elevation-1"
-        :hide-default-header="true"
-        :hide-default-footer="true"
-      >
+      <v-data-table :headers="headers" :items="nftMetaData.attributes"
+        :items-per-page="nftMetaData.attributes.length" class="elevation-1" hide-default-footer>
         <template v-slot:top>
-          <v-toolbar flat class="mt-4">
-            <v-toolbar-title>Attributes</v-toolbar-title>
-          </v-toolbar>
+            <v-toolbar flat>
+                <v-toolbar-title>Attributes</v-toolbar-title>
+            </v-toolbar>
         </template>
       </v-data-table>
     </v-card>

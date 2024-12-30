@@ -106,7 +106,7 @@
               append-icon="mdi-open-in-new"
               >Ava Scan NFT</v-btn
             >
-            <v-btn
+            <!-- <v-btn
               class="mt-4"
               variant="tonal"
               color="grey"
@@ -120,6 +120,16 @@
                   contractAddress
                 )
               "
+              append-icon="mdi-open-in-new"
+              >NFT Meta-Data</v-btn
+            > -->
+            <v-btn
+              class="mt-4"
+              variant="tonal"
+              color="grey"
+              rounded="lg"
+              target="_blank"
+              @click="goToMetaDataPage(nft.tokenId)"
               append-icon="mdi-open-in-new"
               >NFT Meta-Data</v-btn
             >
@@ -141,7 +151,6 @@
 </template>
 
 <script setup lang="ts">
-import pkgJson from '../../package.json';
 import {
   useEvmNftGallery,
   useEvmMetaDataGallery,
@@ -149,6 +158,7 @@ import {
   dahDemoV1Abi as abi,
   useNftStore,
 } from 'vue-evm-nft';
+import { useRouter } from 'vue-router';
 
 // Pour House Studios
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
@@ -187,6 +197,10 @@ const {
   isGetAllNftQuery: false,
 });
 
+const router = useRouter();
+const goToMetaDataPage = (tokenId: number) => {
+  router.push(`/nftMetaDetails/evmMetaDataGalleryDetails?tokenId=${tokenId}`);
+};
 // Stop timing after the operation is complete
 watch(isLoading, (value) => {
   if (!value) {
