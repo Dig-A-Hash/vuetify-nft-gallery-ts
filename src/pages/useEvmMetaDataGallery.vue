@@ -73,7 +73,7 @@
         size="96"
       ></v-progress-circular
       ><br />
-      Loading...
+      {{ loadingMessage }}
     </v-container>
 
     <v-container
