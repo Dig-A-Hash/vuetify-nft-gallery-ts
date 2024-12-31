@@ -190,6 +190,7 @@ import {
   useNftStore,
 } from 'vue-evm-nft';
 import { useRouter } from 'vue-router';
+
 const router = useRouter();
 const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
@@ -202,12 +203,8 @@ const itemsPerPage = 5;
 const nftStoreItemCollectionName = 'useEvmNftGallery1';
 const lazy = LAZY_SRC_PLACEHOLDER;
 
-const goToMetaDataPage = (tokenId: number) => {
-  router.push(`/nftMetaDetails/evmNftGalleryDetails?tokenId=${tokenId}`);
-};
-
 // Start timing before fetching NFTs
-const startTime = performance.now();
+var startTime = performance.now();
 const elapsedFormattedTime = ref('');
 
 const {
@@ -233,10 +230,16 @@ const {
 
 // Stop timing after the operation is complete
 watch(isLoading, (value) => {
-  if (!value) {
+  if (value) {
+    startTime = performance.now();
+  } else {
     const endTime = performance.now();
     const elapsedTime = endTime - startTime;
     elapsedFormattedTime.value = (elapsedTime / 1000).toFixed(2) + ' seconds';
   }
 });
+
+const goToMetaDataPage = (tokenId: number) => {
+  router.push(`/nftMetaDetails/evmNftGalleryDetails?tokenId=${tokenId}`);
+};
 </script>
