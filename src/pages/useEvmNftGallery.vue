@@ -1,4 +1,3 @@
-<!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4 mt-4" max-width="1000">
     <div class="text-h4 mb-4 text-orange">useEvmNftGallery TypeScript Demo</div>
@@ -9,8 +8,9 @@
       <v-row class="">
         <v-col cols="12" sm="6" class="d-flex justify-start align-center">
           <div>
-            <div class="text-h6 mb-0">Dig-A-Hash Roadmap</div>
+            <div class="text-h6 mb-0">Dig-A-Hash Roadmap NFTs</div>
             <div class="mt-n1 font-12">
+              Fetched in
               {{
                 elapsedFormattedTime === ''
                   ? '0.0 Seconds (Pinia Cached Results)'
@@ -70,7 +70,7 @@
         size="96"
       ></v-progress-circular
       ><br />
-      Loading...
+      {{ loadingMessage }}
     </v-container>
 
     <v-container
@@ -96,62 +96,73 @@
               <v-chip
                 :color="
                   nftHelperStore.getStatusColor(
-                    nftHelperStore.getStatus(nft.metaData)
+                    nftStore.getPublicAttributeValue(nft.metaData, 'status')
                   )
                 "
-                >{{ nftHelperStore.getStatus(nft.metaData) }}</v-chip
+                >{{
+                  nftStore.getPublicAttributeValue(nft.metaData, 'status')
+                }}</v-chip
               >
             </div>
             <span class="text-subtitle-1">
               <span
                 v-if="
-                  nftHelperStore.getStatus(nft.metaData).toLowerCase() ===
-                  'complete'
+                  nftStore
+                    .getPublicAttributeValue(nft.metaData, 'status')
+                    ?.toLowerCase() === 'complete'
                 "
               >
                 Release Date:
               </span>
               <span v-else> Target Release: </span>
 
-              {{ nftHelperStore.getDate(nft.metaData) }}</span
+              {{
+                nftStore.getPublicAttributeValue(nft.metaData, 'date') || 'N/A'
+              }}</span
             >
             <p class="mt-2" v-html="nft.metaData.description"></p>
+            <v-btn
+              class="mt-4 mr-2"
+              variant="tonal"
+              color="blue"
+              rounded="lg"
+              target="_blank"
+              @click="goToMetaDataPage(nft.tokenId)"
+              prepend-icon="mdi-table"
+              >Detail View</v-btn
+            >
             <v-btn
               class="mt-4 mr-2"
               variant="tonal"
               color="grey"
               rounded="lg"
               target="_blank"
-              :href="`https://avascan.info/blockchain/c/erc721/0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63/nft/${nft.tokenId}`"
-              append-icon="mdi-open-in-new"
-              >Ava Scan NFT</v-btn
-            >
-            <!-- <v-btn
-              class="mt-4"
-              variant="tonal"
-              color="grey"
-              rounded="lg"
-              target="_blank"
               :href="
-                nftHelperStore.metaDataUrl(
+                nftStore.explorerTokenUrl(
                   nft.tokenId,
-                  contractPublicKey,
-                  chainId,
-                  contractAddress
+                  contractAddress,
+                  blockchains.avalanche
                 )
               "
-              append-icon="mdi-open-in-new"
-              >NFT Meta-Data</v-btn
-            > -->
+              prepend-icon="mdi-open-in-new"
+              >Verify On-Chain</v-btn
+            >
             <v-btn
               class="mt-4"
               variant="tonal"
               color="grey"
               rounded="lg"
               target="_blank"
-              @click="goToMetaDataPage(nft.tokenId)"
-              append-icon="mdi-open-in-new"
-              >NFT Meta-Data</v-btn
+              :href="
+                nftStore.digaMetaDataUrl(
+                  nft.tokenId,
+                  contractPublicKey,
+                  chainId,
+                  contractAddress
+                )
+              "
+              prepend-icon="mdi-open-in-new"
+              >Raw Meta-Data</v-btn
             >
           </div>
         </v-col>
@@ -177,22 +188,19 @@ import {
   blockchains,
   dahDemoV1Abi as abi,
   useNftStore,
-  useEvmNft,
-  type Nft,
 } from 'vue-evm-nft';
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const nftStore = useNftStore();
+const nftHelperStore = useNftHelperStore();
+useSeo('useEvmMetaData', 'useEvmMetaData TypeScript NFT Demo');
 
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
 const contractAddress: string = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
 const chainId = blockchains.avalanche.chainId;
 const itemsPerPage = 5;
 const nftStoreItemCollectionName = 'useEvmNftGallery1';
-
 const lazy = LAZY_SRC_PLACEHOLDER;
-const nftStore = useNftStore();
-const nftHelperStore = useNftHelperStore();
-useSeo('useEvmMetaData', 'useEvmMetaData TypeScript NFT Demo');
 
 const goToMetaDataPage = (tokenId: number) => {
   router.push(`/nftMetaDetails/evmNftGalleryDetails?tokenId=${tokenId}`);
