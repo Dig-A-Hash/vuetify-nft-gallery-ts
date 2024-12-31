@@ -13,6 +13,7 @@
           <div>
             <div class="text-h6 mb-0">Painting NFTs</div>
             <div class="mt-n1 font-12">
+              Fetched in
               {{
                 elapsedFormattedTime === ''
                   ? '0.0 Seconds (Pinia Cached Results)'
@@ -72,7 +73,7 @@
         size="96"
       ></v-progress-circular
       ><br />
-      Loading...
+      {{ loadingMessage }}
     </v-container>
 
     <v-container
@@ -95,38 +96,34 @@
               {{ nft.metaData.name }}
             </div>
             <div class="my-2">
-              <v-chip
-                :color="
-                  nftHelperStore.getStatusColor(
-                    nftHelperStore.getStatus(nft.metaData)
-                  )
-                "
-                >{{ nftHelperStore.getStatus(nft.metaData) }}</v-chip
-              >
+              {{ nftStore.getPublicAttributeValue(nft.metaData, 'status') }}
             </div>
-            <span class="text-subtitle-1">
-              <span
-                v-if="
-                  nftHelperStore.getStatus(nft.metaData).toLowerCase() ===
-                  'complete'
-                "
-              >
-                Release Date:
-              </span>
-              <span v-else> Target Release: </span>
-
-              {{ nftHelperStore.getDate(nft.metaData) }}</span
-            >
             <p class="mt-2" v-html="nft.metaData.description"></p>
+            <v-btn
+              class="mt-4 mr-2"
+              variant="tonal"
+              color="blue"
+              rounded="lg"
+              target="_blank"
+              @click="goToMetaDataPage(nft.tokenId)"
+              prepend-icon="mdi-table"
+              >Detail View</v-btn
+            >
             <v-btn
               class="mt-4 mr-2"
               variant="tonal"
               color="grey"
               rounded="lg"
               target="_blank"
-              :href="`https://avascan.info/blockchain/c/erc721/0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63/nft/${nft.tokenId}`"
-              append-icon="mdi-open-in-new"
-              >Ava Scan NFT</v-btn
+              :href="
+                nftStore.explorerTokenUrl(
+                  nft.tokenId,
+                  contractAddress,
+                  blockchains.fantom
+                )
+              "
+              prepend-icon="mdi-open-in-new"
+              >Verify On-Chain</v-btn
             >
             <v-btn
               class="mt-4"
@@ -135,15 +132,15 @@
               rounded="lg"
               target="_blank"
               :href="
-                nftHelperStore.metaDataUrl(
+                nftStore.digaMetaDataUrl(
                   nft.tokenId,
                   contractPublicKey,
                   chainId,
                   contractAddress
                 )
               "
-              append-icon="mdi-open-in-new"
-              >NFT Meta-Data</v-btn
+              prepend-icon="mdi-open-in-new"
+              >Raw Meta-Data</v-btn
             >
           </div>
         </v-col>
@@ -169,23 +166,24 @@ import {
   dahDemoV1Abi as abi,
   useNftStore,
 } from 'vue-evm-nft';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const nftStore = useNftStore();
+const nftHelperStore = useNftHelperStore();
+useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 // Pour House Studios
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
 const contractAddress: string = '0xd8de74b630c8bf1b3ca59010e601c3e271f0d85b';
 const chainId = blockchains.fantom.chainId;
 const rpc = blockchains.fantom.publicRpc;
-
 const itemsPerPage = 50;
 const nftStoreItemCollectionName = 'useEvmMetaDataGallery1';
-
 const lazy = LAZY_SRC_PLACEHOLDER;
-const nftStore = useNftStore();
-const nftHelperStore = useNftHelperStore();
-useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 // Start timing before fetching NFTs
-const startTime = performance.now();
+var startTime = performance.now();
 const elapsedFormattedTime = ref('');
 
 const {
@@ -210,10 +208,16 @@ const {
 
 // Stop timing after the operation is complete
 watch(isLoading, (value) => {
-  if (!value) {
+  if (value) {
+    startTime = performance.now();
+  } else {
     const endTime = performance.now();
     const elapsedTime = endTime - startTime;
     elapsedFormattedTime.value = (elapsedTime / 1000).toFixed(2) + ' seconds';
   }
 });
+
+const goToMetaDataPage = (tokenId: number) => {
+  router.push(`/nftMetaDetails/evmMetaDataGalleryDetails?tokenId=${tokenId}`);
+};
 </script>

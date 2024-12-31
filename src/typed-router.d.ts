@@ -20,7 +20,8 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/[...path]': RouteRecordInfo<'/[...path]', '/:path(.*)', { path: ParamValue<true> }, { path: ParamValue<false> }>,
-    '/nftMetaDataDetails': RouteRecordInfo<'/nftMetaDataDetails', '/nftMetaDataDetails', Record<never, never>, Record<never, never>>,
+    '/nftMetaDetails/evmMetaDataGalleryDetails': RouteRecordInfo<'/nftMetaDetails/evmMetaDataGalleryDetails', '/nftMetaDetails/evmMetaDataGalleryDetails', Record<never, never>, Record<never, never>>,
+    '/nftMetaDetails/evmNftGalleryDetails': RouteRecordInfo<'/nftMetaDetails/evmNftGalleryDetails', '/nftMetaDetails/evmNftGalleryDetails', Record<never, never>, Record<never, never>>,
     '/useEvmMetaDataGallery': RouteRecordInfo<'/useEvmMetaDataGallery', '/useEvmMetaDataGallery', Record<never, never>, Record<never, never>>,
     '/useEvmNftGallery': RouteRecordInfo<'/useEvmNftGallery', '/useEvmNftGallery', Record<never, never>, Record<never, never>>,
   }
