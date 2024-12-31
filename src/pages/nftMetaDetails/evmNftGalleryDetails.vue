@@ -5,26 +5,28 @@
     <v-card v-if="nftMetaData">
       <v-card-title class="text-orange">{{ nftMetaData.name }}</v-card-title>
       <div class="mx-4" v-html="nftMetaData.description"></div>
-      <v-img :src="nftMetaData.image" height="200" class="mt-4" />
-      <v-data-table :headers="headers" :items="nftMetaData.attributes"
-        :items-per-page="nftMetaData.attributes.length" class="elevation-1" hide-default-footer>
+      <v-img :src="nftMetaData.image" max-height="500" class="my-4" />
+      <v-data-table
+        :headers="headers"
+        :items="nftMetaData.attributes"
+        class="elevation-1"
+        hide-default-footer
+      >
         <template v-slot:top>
-            <v-toolbar flat>
-                <v-toolbar-title>Attributes</v-toolbar-title>
-            </v-toolbar>
+          <v-toolbar flat>
+            <v-toolbar-title>Attributes</v-toolbar-title>
+          </v-toolbar>
         </template>
       </v-data-table>
     </v-card>
     <v-alert v-else-if="loadingMessage" type="info">{{
       loadingMessage
     }}</v-alert>
-    <v-alert v-else type="error">NFT metadata not found!</v-alert>
+    <v-alert v-else type="error">NFT metadata not found.</v-alert>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import {
   useEvmNft,
   blockchains,
@@ -33,17 +35,16 @@ import {
 } from 'vue-evm-nft';
 
 const route = useRoute();
-const tokenId = route.query.tokenId as string; // Get the tokenId from the URL query
 
-// Initialize required variables
+const tokenId = route.query.tokenId as string;
 const nftMetaData = ref<NftMetaData | null>(null);
-const loadingMessage = ref('Loading NFT metadata...'); // Initialize loading message
+const loadingMessage = ref('Loading NFT metadata...');
 const headers = [
   { text: 'Trait Type', value: 'trait_type' },
   { text: 'Value', value: 'value' },
 ];
 
-// Define your contract details
+// Define contract details
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
 const contractAddress = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
 const chainId = blockchains.avalanche.chainId;
@@ -51,9 +52,8 @@ const chainId = blockchains.avalanche.chainId;
 onMounted(async () => {
   if (tokenId) {
     try {
-      // Initialize the EVM NFT composable
       const evmNft = await useEvmNft(
-        0, // This is ignored, you can pass any number
+        0, // Ignored in this case, pass any number
         null,
         null,
         contractPublicKey,
@@ -62,15 +62,14 @@ onMounted(async () => {
         chainId
       );
 
-      // Fetch NFT metadata for the specific token ID
       const metaData = await evmNft.getTokenMetaData([Number(tokenId)]);
-      nftMetaData.value = metaData[0].metaData; // assign to nftMetaData.value
-      loadingMessage.value = ''; // Clear loading message
-      useSeo(nftMetaData.value.name, nftMetaData.value.name); // Update SEO
+      nftMetaData.value = metaData[0].metaData;
+      loadingMessage.value = '';
+      useSeo(nftMetaData.value.name, nftMetaData.value.name);
     } catch (error) {
       console.error('Error fetching NFT metadata:', error);
-      nftMetaData.value = null; // Handle error case
-      loadingMessage.value = ''; // Clear loading message
+      nftMetaData.value = null;
+      loadingMessage.value = '';
     }
   } else {
     loadingMessage.value = 'Token ID is missing!';
