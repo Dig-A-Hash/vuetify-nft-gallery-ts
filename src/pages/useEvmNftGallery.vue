@@ -166,7 +166,7 @@
             >
           </div>
         </v-col>
-        <v-divider class="my-4"></v-divider>
+        <v-divider class="ma-4"></v-divider>
       </v-row>
       <v-row class="mt-6">
         <v-col>
@@ -197,7 +197,7 @@ const nftHelperStore = useNftHelperStore();
 useSeo('useEvmMetaData', 'useEvmMetaData TypeScript NFT Demo');
 
 const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
-const contractAddress: string = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
+const contractAddress = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
 const chainId = blockchains.avalanche.chainId;
 const itemsPerPage = 5;
 const nftStoreItemCollectionName = 'useEvmNftGallery1';
