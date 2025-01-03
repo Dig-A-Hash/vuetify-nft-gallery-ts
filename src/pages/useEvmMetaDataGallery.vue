@@ -1,4 +1,3 @@
-<!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
     <div class="text-h4 mb-4 mt-4 text-orange">
@@ -97,7 +96,7 @@
         <v-col cols="12" sm="3" md="2">
           <v-img
             :src="nftStore.getImageMedium(nft.metaData.image)"
-            :lazy-src="lazy"
+            :lazy-src="LAZY_SRC_PLACEHOLDER"
             class="ma-4"
             height="150"
           ></v-img>
@@ -172,10 +171,10 @@
 </template>
 
 <script setup lang="ts">
+import { LAZY_SRC_PLACEHOLDER } from '@/modules/constants';
 import {
   useEvmMetaDataGallery,
   blockchains,
-  dahDemoV1Abi as abi,
   useNftStore,
   type EvmMetaDataOptions,
 } from 'vue-evm-nft';
@@ -189,7 +188,6 @@ useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 const contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
   'useEvmMetaDataGallery1'
 );
-const lazy = LAZY_SRC_PLACEHOLDER;
 
 // Start timing before fetching NFTs
 var startTime = performance.now();
@@ -217,6 +215,8 @@ watch(isLoading, (value) => {
 });
 
 const goToMetaDataPage = (tokenId: number) => {
-  router.push(`/nftMetaDetails/evmMetaDataGalleryDetails?tokenId=${tokenId}`);
+  router.push(
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
+  );
 };
 </script>

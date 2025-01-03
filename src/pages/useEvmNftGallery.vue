@@ -24,21 +24,33 @@
           sm="6"
           class="d-flex justify-center justify-sm-end align-center"
         >
-          <div v-if="nftStore.itemCollections[nftStoreItemCollectionName]">
+          <div
+            v-if="
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ]
+            "
+          >
             Viewing
             <v-chip class="mr-1">{{
-              page === 1 ? '1' : (page - 1) * itemsPerPage + 1
+              page === 1 ? '1' : (page - 1) * contractConfig.itemsPerPage + 1
             }}</v-chip>
             -
             <v-chip class="mr-1">{{
-              page.value * itemsPerPage >
-              nftStore.itemCollections[nftStoreItemCollectionName].itemCount
-                ? nftStore.itemCollections[nftStoreItemCollectionName].itemCount
-                : page * itemsPerPage
+              page.value * contractConfig.itemsPerPage >
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ].itemCount
+                ? nftStore.itemCollections[
+                    contractConfig.nftStoreItemCollectionName
+                  ].itemCount
+                : page * contractConfig.itemsPerPage
             }}</v-chip>
             of
             <v-chip class="mr-1">{{
-              nftStore.itemCollections[nftStoreItemCollectionName].itemCount
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ].itemCount
             }}</v-chip>
 
             <v-btn
@@ -82,7 +94,7 @@
         <v-col cols="12" sm="3" md="2">
           <v-img
             :src="nft.metaData.image"
-            :lazy-src="lazy"
+            :lazy-src="LAZY_SRC_PLACEHOLDER"
             class="ma-4"
             height="150"
           ></v-img>
@@ -140,7 +152,7 @@
               :href="
                 nftStore.explorerTokenUrl(
                   nft.tokenId,
-                  contractAddress,
+                  contractConfig.contractAddress,
                   blockchains.avalanche
                 )
               "
@@ -156,9 +168,9 @@
               :href="
                 nftStore.digaMetaDataUrl(
                   nft.tokenId,
-                  contractPublicKey,
-                  chainId,
-                  contractAddress
+                  contractConfig.contractPublicKey,
+                  contractConfig.chainId || 0,
+                  contractConfig.contractAddress
                 )
               "
               prepend-icon="mdi-open-in-new"
@@ -182,12 +194,13 @@
 </template>
 
 <script setup lang="ts">
-import pkgJson from '../../package.json';
+import { LAZY_SRC_PLACEHOLDER } from '@/modules/constants';
 import {
   useEvmNftGallery,
   blockchains,
   dahDemoV1Abi as abi,
   useNftStore,
+  type EvmNftOptions,
 } from 'vue-evm-nft';
 import { useRouter } from 'vue-router';
 
@@ -196,12 +209,8 @@ const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 useSeo('useEvmMetaData', 'useEvmMetaData TypeScript NFT Demo');
 
-const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
-const contractAddress = '0x33f1cdD52e7ec6F65Ab93dD518c1e2EdB3a8Dd63';
-const chainId = blockchains.avalanche.chainId;
-const itemsPerPage = 5;
-const nftStoreItemCollectionName = 'useEvmNftGallery1';
-const lazy = LAZY_SRC_PLACEHOLDER;
+const contractConfig =
+  nftHelperStore.getContractConfig<EvmNftOptions>('useEvmNftGallery1');
 
 // Start timing before fetching NFTs
 var startTime = performance.now();
@@ -215,18 +224,7 @@ const {
   loadingMessage,
   isAscending,
   toggleSortOrder,
-  getTokenMetaData,
-} = useEvmNftGallery({
-  contractPublicKey,
-  contractAddress,
-  abi,
-  chainId,
-  holderPublicKey: null,
-  rpc: blockchains.avalanche.publicRpc,
-  itemsPerPage,
-  nftStoreItemCollectionName,
-  isAscendingSort: false,
-});
+} = useEvmNftGallery(contractConfig);
 
 // Stop timing after the operation is complete
 watch(isLoading, (value) => {
@@ -240,6 +238,8 @@ watch(isLoading, (value) => {
 });
 
 const goToMetaDataPage = (tokenId: number) => {
-  router.push(`/nftMetaDetails/evmNftGalleryDetails?tokenId=${tokenId}`);
+  router.push(
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
+  );
 };
 </script>
