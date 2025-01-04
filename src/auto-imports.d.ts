@@ -6,8 +6,10 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const ContractName: typeof import('./stores/nftHelperStore')['ContractName']
   const EffectScope: typeof import('vue')['EffectScope']
   const LAZY_SRC_PLACEHOLDER: typeof import('./modules/constants')['LAZY_SRC_PLACEHOLDER']
+  const SITE_TITLE: typeof import('./modules/constants')['SITE_TITLE']
   const app: typeof import('./stores/app')['app']
   const appStore: typeof import('./stores/app')['appStore']
   const computed: typeof import('vue')['computed']
@@ -81,6 +83,9 @@ declare global {
   // @ts-ignore
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { ContractName } from './stores/nftHelperStore'
+  import('./stores/nftHelperStore')
 }
 
 // for vue template auto import
@@ -88,8 +93,10 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
+    readonly ContractName: UnwrapRef<typeof import('./stores/nftHelperStore')['ContractName']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly LAZY_SRC_PLACEHOLDER: UnwrapRef<typeof import('./modules/constants')['LAZY_SRC_PLACEHOLDER']>
+    readonly SITE_TITLE: UnwrapRef<typeof import('./modules/constants')['SITE_TITLE']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
