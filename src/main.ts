@@ -1,14 +1,6 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
-
-// Plugins
 import { registerPlugins } from '@/plugins';
-
-// Components
 import App from './App.vue';
+import VueGtag from 'vue-gtag';
 import { createHead } from '@unhead/vue';
 
 // Composables
@@ -24,6 +16,7 @@ import './styles/navbar.scss';
 import './styles/settings.scss';
 
 const app = createApp(App);
+app.use(VueGtag, { config: { id: 'G-HCSTGH2R17' } });
 
 const head = createHead();
 app.use(head);
