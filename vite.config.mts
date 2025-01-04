@@ -24,7 +24,19 @@ export default defineConfig({
           'vue-router/auto': ['useRoute', 'useRouter'],
         },
       ],
-      dirs: ['src/modules', 'src/composables', 'src/stores'], // add
+      dirs: [
+        'src/modules',
+        'src/modules/**',
+        'src/composables',
+        'src/composables/**',
+        'src/stores',
+        'src/stores/**',
+        'src/types',
+        'src/types/**',
+      ],
+      dirsScanOptions: {
+        types: true, // Enable auto import the types under the directories
+      },
       dts: 'src/auto-imports.d.ts',
       eslintrc: {
         enabled: true,

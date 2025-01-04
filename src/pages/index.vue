@@ -38,6 +38,10 @@
         >
         to browse the different functions.
       </p>
+      <p class="text-body-1 text-left mt-4">
+        This is a mobile first, Single Page Application supporting Search Engine
+        Optimization, and Google Analytics based on the NFT meta-data.
+      </p>
     </v-card>
     <v-card
       class="mx-auto pa-6 elevation-0 bg-grey-darken-4 mt-4"

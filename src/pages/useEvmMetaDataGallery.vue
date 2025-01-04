@@ -1,4 +1,3 @@
-<!-- pages/index.vue -->
 <template>
   <v-sheet class="bg-transparent mx-xs-0 mx-sm-auto px-4" max-width="1000">
     <div class="text-h4 mb-4 mt-4 text-orange">
@@ -27,21 +26,33 @@
           sm="6"
           class="d-flex justify-center justify-sm-end align-center"
         >
-          <div v-if="nftStore.itemCollections[nftStoreItemCollectionName]">
+          <div
+            v-if="
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ]
+            "
+          >
             Viewing
             <v-chip class="mr-1">{{
-              page === 1 ? '1' : (page - 1) * itemsPerPage + 1
+              page === 1 ? '1' : (page - 1) * contractConfig.itemsPerPage + 1
             }}</v-chip>
             -
             <v-chip class="mr-1">{{
-              page.value * itemsPerPage >
-              nftStore.itemCollections[nftStoreItemCollectionName].itemCount
-                ? nftStore.itemCollections[nftStoreItemCollectionName].itemCount
-                : page * itemsPerPage
+              page.value * contractConfig.itemsPerPage >
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ].itemCount
+                ? nftStore.itemCollections[
+                    contractConfig.nftStoreItemCollectionName
+                  ].itemCount
+                : page * contractConfig.itemsPerPage
             }}</v-chip>
             of
             <v-chip class="mr-1">{{
-              nftStore.itemCollections[nftStoreItemCollectionName].itemCount
+              nftStore.itemCollections[
+                contractConfig.nftStoreItemCollectionName
+              ].itemCount
             }}</v-chip>
 
             <v-btn
@@ -85,7 +96,7 @@
         <v-col cols="12" sm="3" md="2">
           <v-img
             :src="nftStore.getImageMedium(nft.metaData.image)"
-            :lazy-src="lazy"
+            :lazy-src="LAZY_SRC_PLACEHOLDER"
             class="ma-4"
             height="150"
           ></v-img>
@@ -118,7 +129,7 @@
               :href="
                 nftStore.explorerTokenUrl(
                   nft.tokenId,
-                  contractAddress,
+                  contractConfig.contractAddress,
                   blockchains.fantom
                 )
               "
@@ -134,9 +145,9 @@
               :href="
                 nftStore.digaMetaDataUrl(
                   nft.tokenId,
-                  contractPublicKey,
-                  chainId,
-                  contractAddress
+                  contractConfig.contractPublicKey,
+                  contractConfig.chainId || 0,
+                  contractConfig.contractAddress
                 )
               "
               prepend-icon="mdi-open-in-new"
@@ -160,11 +171,12 @@
 </template>
 
 <script setup lang="ts">
+import { LAZY_SRC_PLACEHOLDER } from '@/modules/constants';
 import {
   useEvmMetaDataGallery,
   blockchains,
-  dahDemoV1Abi as abi,
   useNftStore,
+  type EvmMetaDataOptions,
 } from 'vue-evm-nft';
 import { useRouter } from 'vue-router';
 
@@ -173,14 +185,9 @@ const nftStore = useNftStore();
 const nftHelperStore = useNftHelperStore();
 useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
-// Pour House Studios
-const contractPublicKey = '0xcbb2a9868d73f24c056893131b97a69ffd36eba9';
-const contractAddress: string = '0xd8de74b630c8bf1b3ca59010e601c3e271f0d85b';
-const chainId = blockchains.fantom.chainId;
-const rpc = blockchains.fantom.publicRpc;
-const itemsPerPage = 50;
-const nftStoreItemCollectionName = 'useEvmMetaDataGallery1';
-const lazy = LAZY_SRC_PLACEHOLDER;
+const contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
+  'useEvmMetaDataGallery1'
+);
 
 // Start timing before fetching NFTs
 var startTime = performance.now();
@@ -194,17 +201,7 @@ const {
   loadingMessage,
   isAscending,
   toggleSortOrder,
-} = useEvmMetaDataGallery({
-  contractPublicKey,
-  contractAddress,
-  abi,
-  chainId,
-  rpc,
-  itemsPerPage,
-  nftStoreItemCollectionName,
-  isAscendingSort: false,
-  isGetAllNftQuery: false,
-});
+} = useEvmMetaDataGallery(contractConfig);
 
 // Stop timing after the operation is complete
 watch(isLoading, (value) => {
@@ -218,6 +215,8 @@ watch(isLoading, (value) => {
 });
 
 const goToMetaDataPage = (tokenId: number) => {
-  router.push(`/nftMetaDetails/evmMetaDataGalleryDetails?tokenId=${tokenId}`);
+  router.push(
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
+  );
 };
 </script>
