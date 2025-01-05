@@ -173,10 +173,10 @@
 <script setup lang="ts">
 import { LAZY_SRC_PLACEHOLDER } from '@/modules/constants';
 import {
-  useEvmMetaDataGallery,
-  blockchains,
-  useNftStore,
   type EvmMetaDataOptions,
+  blockchains,
+  useEvmMetaDataGallery,
+  useNftStore,
 } from 'vue-evm-nft';
 import { useRouter } from 'vue-router';
 
@@ -186,11 +186,11 @@ const nftHelperStore = useNftHelperStore();
 useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 const contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
-  'useEvmMetaDataGallery1'
+  'useEvmMetaDataGallery1',
 );
 
 // Start timing before fetching NFTs
-var startTime = performance.now();
+let startTime = performance.now();
 const elapsedFormattedTime = ref('');
 
 const {
@@ -210,13 +210,13 @@ watch(isLoading, (value) => {
   } else {
     const endTime = performance.now();
     const elapsedTime = endTime - startTime;
-    elapsedFormattedTime.value = (elapsedTime / 1000).toFixed(2) + ' seconds';
+    elapsedFormattedTime.value = `${(elapsedTime / 1000).toFixed(2)} seconds`;
   }
 });
 
 const goToMetaDataPage = (tokenId: number) => {
   router.push(
-    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`,
   );
 };
 </script>
