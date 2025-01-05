@@ -1,3 +1,4 @@
+// App BG color
 // .v-application {
 //   background: radial-gradient(
 //     circle,
@@ -5,6 +6,18 @@
 //     rgba(0, 0, 0, 1) 100%
 //   ) !important;
 // }
+
+// Dialog overlay color
+.v-overlay__scrim {
+  background-color: black !important;
+  opacity: .9 !important;
+
+  background: radial-gradient(
+    circle,
+    rgba(23, 23, 23, 1) 24%,
+    rgba(0, 0, 0, 1) 100%
+  ) !important;
+}
 
 .styles-bg-black-shine {
   background: radial-gradient(

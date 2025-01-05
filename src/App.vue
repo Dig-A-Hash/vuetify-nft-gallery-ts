@@ -44,6 +44,39 @@
       <router-view />
       <AppFooter />
     </v-main>
+    <v-dialog
+      max-width="500"
+      v-model="appStore.isGlobalErrorShowing"
+      persistent
+    >
+      <template v-slot:default="{ isActive }">
+        <v-card>
+          <v-card-title class="bg-red-darken-4">Error Message</v-card-title>
+          <v-card-text v-if="appStore.lastError">
+            {{ appStore.lastError?.message }}
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn
+              width="100"
+              variant="flat"
+              color="grey-darken-3"
+              @click="appStore.dismissErrorGoHome"
+              >Home</v-btn
+            >
+            <v-spacer></v-spacer>
+
+            <v-btn
+              width="100"
+              variant="flat"
+              color="primary"
+              @click="appStore.dismissErrorDialog"
+              >Dismiss</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-dialog>
   </v-app>
 </template>
 

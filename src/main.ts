@@ -1,7 +1,7 @@
 import { registerPlugins } from '@/plugins';
-import App from './App.vue';
-import VueGtag from 'vue-gtag';
 import { createHead } from '@unhead/vue';
+import VueGtag from 'vue-gtag';
+import App from './App.vue';
 
 // Composables
 import { createApp } from 'vue';
@@ -22,5 +22,11 @@ const head = createHead();
 app.use(head);
 
 registerPlugins(app);
+
+// Handle all errors globally, just throw from anywhere in the app.
+const appStore = useAppStore();
+app.config.errorHandler = (error, vm, info) => {
+  appStore.handleGlobalError(error);
+};
 
 app.mount('#app');
