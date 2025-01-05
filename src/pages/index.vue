@@ -31,17 +31,61 @@
       </h1>
 
       <p class="text-body-1 text-left">
-        A demo showing how to display NFTs by implementing the vue-evm-nft
-        package with Vuetify and Vue using TypeScript. Use the
+        A demo showing how to display NFTs by implementing the
+        <a
+          href="https://github.com/Dig-A-Hash/vue-evm-nft"
+          class="link"
+          target="_blank"
+          >vue-evm-nft</a
+        >
+        package with
+        <a href="https://vuejs.org/" class="link" target="_blank">Vue</a> and
+        <a href="https://vuetifyjs.com/en/" class="link" target="_blank"
+          >Vuetify</a
+        >
+        using
+        <a href="https://www.typescriptlang.org/" class="link" target="_blank"
+          >TypeScript</a
+        >. Use the
         <a href="#" class="link" @click.prevent="appStore.toggleMainNav"
           >nav menu</a
         >
         to browse the different functions.
       </p>
       <p class="text-body-1 text-left mt-4">
-        This is a mobile first, Single Page Application supporting Search Engine
-        Optimization, and Google Analytics based on the NFT meta-data.
+        This demo has additional built-in support for...
       </p>
+      <ul class="ml-4">
+        <li><a href="https://unhead.unjs.io/" class="link">Unhead SEO</a></li>
+        <li>
+          <a
+            href="https://github.com/MatteoGabriele/vue-gtag"
+            class="link"
+            target="_blank"
+            >Google Analytics</a
+          >
+        </li>
+        <li>
+          <a href="https://biomejs.dev/" class="link" target="_blank"
+            >Biome Linting and Formatting</a
+          >
+        </li>
+        <li>
+          <a href="https://pinia.vuejs.org/" class="link" target="_blank"
+            >Pinia State Store</a
+          >
+        </li>
+        <li>
+          <a href="https://sass-lang.com/" class="link" target="_blank"
+            >SCSS Style Sheets</a
+          >
+        </li>
+        <li>
+          <a href="https://nodejs.org/en" class="link" target="_blank"
+            >Node.js</a
+          >
+        </li>
+      </ul>
     </v-card>
     <v-card
       class="mx-auto pa-6 elevation-0 bg-grey-darken-4 mt-4"
