@@ -1,14 +1,14 @@
+import Vue from '@vitejs/plugin-vue';
 // Plugins
 import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
 import Fonts from 'unplugin-fonts/vite';
-import Vue from '@vitejs/plugin-vue';
+import Components from 'unplugin-vue-components/vite';
 import VueRouter from 'unplugin-vue-router/vite';
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 
+import { URL, fileURLToPath } from 'node:url';
 // Utilities
 import { defineConfig } from 'vite';
-import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,7 +39,7 @@ export default defineConfig({
       },
       dts: 'src/auto-imports.d.ts',
       eslintrc: {
-        enabled: true,
+        enabled: false,
       },
       vueTemplate: true,
     }),

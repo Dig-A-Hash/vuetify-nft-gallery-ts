@@ -35,7 +35,7 @@
 const items = [
   {
     title: 'Vuetify Documentation',
-    icon: `$vuetify`,
+    icon: '$vuetify',
     href: 'https://vuetifyjs.com/',
   },
   {
@@ -52,7 +52,7 @@ const items = [
   },
   {
     title: 'Vuetify GitHub',
-    icon: `mdi-github`,
+    icon: 'mdi-github',
     href: 'https://github.com/vuetifyjs/vuetify',
   },
   {
@@ -64,7 +64,7 @@ const items = [
   },
   {
     title: 'Vuetify Reddit',
-    icon: `mdi-reddit`,
+    icon: 'mdi-reddit',
     href: 'https://reddit.com/r/vuetifyjs',
   },
 ];

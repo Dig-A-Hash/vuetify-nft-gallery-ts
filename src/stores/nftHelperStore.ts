@@ -1,10 +1,10 @@
 import type { ContractConfig } from '@/types/ContractConfig';
 import { defineStore } from 'pinia';
 import {
-  blockchains,
-  dahDemoV1Abi,
   type EvmMetaDataOptions,
   type EvmNftOptions,
+  blockchains,
+  dahDemoV1Abi,
 } from 'vue-evm-nft';
 
 // Name the NFT Contracts used by this site.
@@ -57,11 +57,11 @@ export const useNftHelperStore = defineStore('nftHelperStore', {
     },
     getContractConfig: () => {
       return <T extends ContractConfig>(
-        nftStoreItemCollectionName: string
+        nftStoreItemCollectionName: string,
       ): T => {
         const config = contractConfigs.find(
           (item) =>
-            item.nftStoreItemCollectionName === nftStoreItemCollectionName
+            item.nftStoreItemCollectionName === nftStoreItemCollectionName,
         );
 
         if (!config) {

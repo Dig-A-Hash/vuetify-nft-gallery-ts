@@ -17,10 +17,6 @@
         </template>
       </v-data-table>
     </v-card>
-    <v-alert v-else-if="loadingMessage !== ''" type="info">{{
-      loadingMessage
-    }}</v-alert>
-    <v-alert v-else type="error">NFT metadata not found.</v-alert>
   </v-container>
 </template>
 
@@ -30,74 +26,85 @@ import { ContractName } from '@/stores/nftHelperStore';
 import type { ContractConfig } from '@/types/ContractConfig';
 import { getActiveHead } from 'unhead';
 import {
-  useEvmNft,
-  type NftMetaData,
-  type EvmNftOptions,
   type EvmMetaDataOptions,
+  type EvmNftOptions,
+  type NftMetaData,
+  useEvmNft,
 } from 'vue-evm-nft';
 
 const route = useRoute();
 const nftHelperStore = useNftHelperStore();
 
 const tokenId = route.query.tokenId as string;
+const contract = route.query.contract as string;
 const nftMetaData = ref<NftMetaData | null>(null);
-const loadingMessage = ref('Loading NFT metadata...');
 const headers = [
   { text: 'Trait Type', value: 'trait_type' },
   { text: 'Value', value: 'value' },
 ];
 
-// Select the correct contract config based on the route.
-var contractConfig: ContractConfig;
-
-switch (route.query.contract) {
-  case ContractName.UseEvmMetaDataGallery1:
-    contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
-      ContractName.UseEvmMetaDataGallery1
-    );
-    break;
-
-  case ContractName.UseEvmNftGallery1:
-    contractConfig = nftHelperStore.getContractConfig<EvmNftOptions>(
-      ContractName.UseEvmNftGallery1
-    );
-    break;
-}
-
 onMounted(async () => {
-  try {
-    if (!tokenId) {
-      throw new Error('Token ID is missing!');
-    }
-
-    const evmNft = await useEvmNft(
-      0, // Ignored in this case, pass any number
-      null,
-      null,
-      contractConfig.contractPublicKey,
-      contractConfig.contractAddress,
-      contractConfig.abi,
-      contractConfig.chainId
-    );
-
-    const nfts = await evmNft.getTokenMetaData([Number(tokenId)]);
-    nftMetaData.value = nfts[0].metaData;
-    loadingMessage.value = '';
-
-    // Set page title and description for SEO.
-    getActiveHead()?.push({
-      title: `${nftMetaData.value?.name} - ${SITE_TITLE}`,
-      meta: [
-        {
-          name: 'description',
-          content: nftMetaData.value?.description.replace(/<[^>]*>/g, ''),
-        },
-      ],
-    });
-  } catch (error: any) {
-    console.error('Error fetching NFT metadata:', error.message);
+  // Validate query params
+  if (!tokenId) {
     nftMetaData.value = null;
-    loadingMessage.value = error.message;
+    const errorMessage = 'Token ID is missing.';
+    throw new Error(errorMessage);
   }
+
+  if (!contract) {
+    nftMetaData.value = null;
+    const errorMessage = 'Contract is missing.';
+    throw new Error(errorMessage);
+  }
+
+  // Select the correct contract config based on the route.
+  let contractConfig: ContractConfig;
+
+  switch (contract) {
+    case ContractName.UseEvmMetaDataGallery1:
+      contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
+        ContractName.UseEvmMetaDataGallery1
+      );
+      break;
+
+    case ContractName.UseEvmNftGallery1:
+      contractConfig = nftHelperStore.getContractConfig<EvmNftOptions>(
+        ContractName.UseEvmNftGallery1
+      );
+      break;
+
+    default:
+      contractConfig = nftHelperStore.getContractConfig<EvmNftOptions>(
+        ContractName.UseEvmNftGallery1
+      );
+  }
+
+  const evmNft = await useEvmNft(
+    0, // Ignored in this case, pass any number
+    null,
+    null,
+    contractConfig.contractPublicKey,
+    contractConfig.contractAddress,
+    contractConfig.abi,
+    contractConfig.chainId
+  );
+
+  const nfts = await evmNft.getTokenMetaData([Number(tokenId)]);
+  nftMetaData.value = nfts[0].metaData;
+
+  if (!nftMetaData.value) {
+    throw new Error(`Token ID: ${tokenId} not found on Contract: ${contract}.`);
+  }
+
+  // Set page title and description for SEO.
+  getActiveHead()?.push({
+    title: `${nftMetaData.value?.name} - ${SITE_TITLE}`,
+    meta: [
+      {
+        name: 'description',
+        content: nftMetaData.value?.description.replace(/<[^>]*>/g, ''),
+      },
+    ],
+  });
 });
 </script>
