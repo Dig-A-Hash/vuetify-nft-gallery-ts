@@ -53,7 +53,7 @@
         to browse the different functions.
       </p>
       <p class="text-body-1 text-left mt-4">
-        This demo has additional built-in support for...
+        This site template has additional built-in support for...
       </p>
       <ul class="ml-4">
         <li><a href="https://unhead.unjs.io/" class="link">Unhead SEO</a></li>
