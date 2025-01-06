@@ -7,6 +7,8 @@ There are several re-usable resources included like [Pinia](https://pinia.vuejs.
 
 You can see examples of how it works on the following websites where this project is in production use...
 
+https://vuetify-nft-gallery-ts.vercel.app/
+
 https://www.urbanhomesteadx.com/
 
 https://www.dog-plex.com/
