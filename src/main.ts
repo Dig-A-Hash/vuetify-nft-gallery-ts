@@ -14,7 +14,9 @@ import './styles/borders.scss';
 import './styles/cursors.scss';
 import './styles/navbar.scss';
 import './styles/settings.scss';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
+import { QuillEditor } from '@vueup/vue-quill';
 const app = createApp(App);
 app.use(VueGtag, { config: { id: 'G-HCSTGH2R17' } });
 
@@ -28,5 +30,5 @@ const appStore = useAppStore();
 app.config.errorHandler = (error, vm, info) => {
   appStore.handleGlobalError(error);
 };
-
+app.component('QuillEditor', QuillEditor);  
 app.mount('#app');

@@ -19,6 +19,7 @@
   "dependencies": {
     "@mdi/font": "7.4.47",
     "@unhead/vue": "^1.11.14",
+    "@vueup/vue-quill": "^1.2.0",
     "core-js": "^3.37.1",
     "ethers": "^6.13.4",
     "roboto-fontface": "*",

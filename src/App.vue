@@ -31,6 +31,13 @@
           >
         </v-list-item>
         <v-divider></v-divider>
+        <v-list-item link :to="'/editableUseEvmNftGallery'">
+          <v-list-item-title>
+            <v-icon class="mr-2">mdi-image-multiple</v-icon
+            >editableUseEvmNftGallery</v-list-item-title
+          >
+        </v-list-item>
+        <v-divider></v-divider>
         <v-list-item link :to="'/useEvmMetaDataGallery'">
           <v-list-item-title>
             <v-icon class="mr-2">mdi-image-multiple</v-icon
