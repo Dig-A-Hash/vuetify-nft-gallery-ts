@@ -1,7 +1,7 @@
 # Vuetify NFT Gallery in  TypeScript
 This is a Web Front-End written with [Vue 3](https://vuejs.org/guide/introduction.html) and [Vuetify](https://dev.vuetifyjs.com/en/introduction/why-vuetify/#what-is-vuetify3f). This demo shows you how to implement the [vue-evm-nft](https://github.com/Dig-A-Hash/vue-evm-nft/tree/main) package to display NFTs in the web browser, directly from the blockchain using TypeScript. No API needed, no wallet needed.
 
-![](https://i.imgur.com/QVlMJcM.jpg)
+![](https://i.imgur.com/2bHnVGq.jpg)
 
 There are several re-usable resources included like [Pinia](https://pinia.vuejs.org/introduction.html) stores, [components](https://vuejs.org/guide/components/registration.html), and [composables](https://vuejs.org/guide/extras/composition-api-faq.html) that can be used to call any EVM based blockchain for NFTs using [Ethers.js](https://github.com/ethers-io/ethers.js). Even a 404 route built-in using the [Vue Router](https://router.vuejs.org/guide/).
 
