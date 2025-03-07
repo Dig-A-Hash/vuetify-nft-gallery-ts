@@ -4,8 +4,9 @@ import {
   type EvmMetaDataOptions,
   type EvmNftOptions,
   blockchains,
-  dahDemoV1Abi,
 } from 'vue-evm-nft';
+
+import { dahDemoV1Abi } from '@/assets/abi/dahDemoV1Abi';
 
 // Name the NFT Contracts used by this site.
 export enum ContractName {
@@ -57,11 +58,11 @@ export const useNftHelperStore = defineStore('nftHelperStore', {
     },
     getContractConfig: () => {
       return <T extends ContractConfig>(
-        nftStoreItemCollectionName: string,
+        nftStoreItemCollectionName: string
       ): T => {
         const config = contractConfigs.find(
           (item) =>
-            item.nftStoreItemCollectionName === nftStoreItemCollectionName,
+            item.nftStoreItemCollectionName === nftStoreItemCollectionName
         );
 
         if (!config) {

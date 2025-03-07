@@ -46,7 +46,12 @@
                 ? nftStore.itemCollections[
                     contractConfig.nftStoreItemCollectionName
                   ].itemCount
-                : page * contractConfig.itemsPerPage
+                : Math.min(
+                    nftStore.itemCollections[
+                      contractConfig.nftStoreItemCollectionName
+                    ].itemCount,
+                    page * contractConfig.itemsPerPage
+                  )
             }}</v-chip>
             of
             <v-chip class="mr-1">{{
@@ -186,7 +191,7 @@ const nftHelperStore = useNftHelperStore();
 useSeo('useEvmMetaDataGallery', 'useEvmMetaDataGallery TypeScript NFT Demo');
 
 const contractConfig = nftHelperStore.getContractConfig<EvmMetaDataOptions>(
-  'useEvmMetaDataGallery1',
+  'useEvmMetaDataGallery1'
 );
 
 // Start timing before fetching NFTs
@@ -216,7 +221,7 @@ watch(isLoading, (value) => {
 
 const goToMetaDataPage = (tokenId: number) => {
   router.push(
-    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`,
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
   );
 };
 </script>

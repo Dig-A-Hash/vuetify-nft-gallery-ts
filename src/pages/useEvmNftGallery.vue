@@ -197,7 +197,6 @@
 import { LAZY_SRC_PLACEHOLDER } from '@/modules/constants';
 import {
   type EvmNftOptions,
-  dahDemoV1Abi as abi,
   blockchains,
   useEvmNftGallery,
   useNftStore,
@@ -239,7 +238,7 @@ watch(isLoading, (value) => {
 
 const goToMetaDataPage = (tokenId: number) => {
   router.push(
-    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`,
+    `/Details?&contract=${contractConfig.nftStoreItemCollectionName}&tokenId=${tokenId}`
   );
 };
 </script>
