@@ -7,6 +7,7 @@ import {
 } from 'vue-evm-nft';
 
 import { dahDemoV1Abi } from '@/assets/abi/dahDemoV1Abi';
+import { dahRev2omAbi } from '@/assets/abi/dahRev2omAbi';
 
 // Name the NFT Contracts used by this site.
 export enum ContractName {
@@ -32,10 +33,10 @@ const contractConfigs: ContractConfig[] = [
   // Pour House Studios Paintings Contract Details
   {
     contractPublicKey: '0xcbb2a9868d73f24c056893131b97a69ffd36eba9',
-    contractAddress: '0xd8de74b630c8bf1b3ca59010e601c3e271f0d85b',
-    abi: dahDemoV1Abi,
-    chainId: blockchains.fantom.chainId,
-    rpc: blockchains.fantom.publicRpc,
+    contractAddress: '0xFAdAfa21111f5D75aED908770c61c6322B250843',
+    abi: dahRev2omAbi,
+    chainId: blockchains.polygon.chainId,
+    rpc: blockchains.polygon.publicRpc,
     itemsPerPage: 50,
     nftStoreItemCollectionName: ContractName.UseEvmMetaDataGallery1,
     isAscendingSort: false,
