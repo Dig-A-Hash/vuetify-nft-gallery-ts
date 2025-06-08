@@ -38,6 +38,13 @@
           >
         </v-list-item>
         <v-divider></v-divider>
+        <v-list-item link :to="'/useDahGallery'">
+          <v-list-item-title>
+            <v-icon class="mr-2">mdi-image-multiple</v-icon
+            >useDahGallery</v-list-item-title
+          >
+        </v-list-item>
+        <v-divider></v-divider>
       </v-list>
     </v-navigation-drawer>
     <v-main>

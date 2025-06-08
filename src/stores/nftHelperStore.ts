@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import {
   type EvmMetaDataOptions,
   type EvmNftOptions,
+  type DahGalleryOptions,
   blockchains,
 } from 'vue-evm-nft';
 
@@ -13,6 +14,7 @@ import { dahRev2omAbi } from '@/assets/abi/dahRev2omAbi';
 export enum ContractName {
   UseEvmNftGallery1 = 'useEvmNftGallery1',
   UseEvmMetaDataGallery1 = 'useEvmMetaDataGallery1',
+  UseDahGallery1 = 'useDahGallery1',
 }
 
 // Define contract configurations for each Contract Name
@@ -42,6 +44,21 @@ const contractConfigs: ContractConfig[] = [
     isAscendingSort: false,
     isGetAllNftQuery: false,
   } as EvmMetaDataOptions,
+
+  // Pour House Studios Paintings Contract Details
+  {
+    contractPublicKey: '0xcbb2a9868d73f24c056893131b97a69ffd36eba9',
+    contractAddress: '0xFAdAfa21111f5D75aED908770c61c6322B250843',
+    abi: dahRev2omAbi,
+    chainId: blockchains.polygon.chainId,
+    rpc: blockchains.polygon.publicRpc,
+    itemsPerPage: 50,
+    nftStoreItemCollectionName: ContractName.UseDahGallery1,
+    isAscendingSort: true,
+    isGetAllNftQuery: false,
+    startTokenId: 0,
+    supply: 25,
+  } as DahGalleryOptions,
 ];
 
 /**
