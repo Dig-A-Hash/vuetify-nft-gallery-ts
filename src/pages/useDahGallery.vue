@@ -39,7 +39,7 @@
             }}</v-chip>
             -
             <v-chip class="mr-1">{{
-              page.value * contractConfig.itemsPerPage >
+              page * contractConfig.itemsPerPage >
               nftStore.itemCollections[
                 contractConfig.nftStoreItemCollectionName
               ].itemCount
